@@ -3,3 +3,29 @@
     border-style: dashed;
     border-color: red;
 }
+header{
+    background: linear-gradient(0.25turn, #3f87a6, navy);
+
+}
+header > h1{
+    height: 5vh;
+    color: white;
+    text-align: end;
+    margin-right: 10vh;
+}
+
+#contents > div {
+    display: flex;
+
+}
+
+
+#search-bar{
+    width: 25vh;
+    height: 90vh;
+}
+
+#display{
+    width: 70vh;
+    height: 90vh;
+}
