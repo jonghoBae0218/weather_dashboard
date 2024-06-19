@@ -42,6 +42,10 @@ function doFetch(api){
                         console.log('hum');
                         console.log(data.list[0].main.humidity);
                         
+                        for(let i=0; i<4 ; i++){
+                            let listIndex = 8*(i +1);
+                            createFutureCard(data, listIndex);
+                        }
                         // console.log(data.list[0].weather);
                         // console.log(data.list[8]);
 
@@ -78,4 +82,28 @@ function createTodayCard(data){
 
         // Append the new div to the div with id "today-weather"
     $('#today-weather').append(todayCard);
+}
+
+function createFutureCard(data, i){
+    const futureCard = $('<div>');
+    futureCard.attr('class', 'future-weather-card');
+
+        // Create and append h2 element
+    const date = $('<h2>').text(`(${data.list[i].dt_txt})`);
+
+    futureCard.append(date);
+
+        // Create and append four p tags
+   
+    const cloudIcon = $('<p>').text(data.list[i].weather[0].icon);
+    futureCard.append(cloudIcon);
+    const temp = $('<p>').text('Temp: ' + data.list[i].main.temp + "F");
+    futureCard.append(temp);
+    const wind  = $('<p>').text('Wind: ' + data.list[i].wind.speed + "mps");
+    futureCard.append(wind);
+    const hum = $('<p>').text('Humidity: ' + data.list[i].main.humidity + "%");
+    futureCard.append(hum);
+
+
+    $('#future-weather').append(futureCard);
 }

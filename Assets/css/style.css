@@ -30,9 +30,9 @@ header > h1{
     height: 90vh;
 }
 
-/* #today-weather > div{
-    color: blue;
-} */
+#future-weather > div{
+    background-color: aquamarine;
+}
 
 #today-weather-card{
     color: blue;
