@@ -3,7 +3,6 @@ console.log("JS init");
 const searchEl = $("#search-button");
 
 
-
 let lat=0;
 let lon=0;
 
@@ -14,7 +13,22 @@ searchEl.on('click', function(){
     var country = $('#search-input').val();
     let lonAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${country}&limit=5&appid=54ce6fe12fbefa3507abb38187d01121`
     doFetch(lonAPI);
+    
 });
+$(document).ready(function(){
+    // const pastEl = $(".history");
+
+
+    // pastEl.on('click', function(){
+    //     console.log("Hi");
+    //     // console.log(pastEl.attr(lat));
+    // })
+    $(document).on('click', '.history', function() {
+        console.log("Hi");
+        console.log($(this).attr('lat'));
+    });
+})
+
 
 function doFetch(api){
     fetch(api).then(function (response) {
@@ -27,6 +41,7 @@ function doFetch(api){
             fetch(weathAPI).then(function(response){
                 if(response.ok){
                     response.json().then(function(data){
+                        createHistory(data.city.name, lat, lon);
                         createTodayCard(data);
                         console.log(data.list[0]);
                         console.log('city name');
@@ -58,7 +73,15 @@ function doFetch(api){
         }
     });
 }
-
+function createHistory(data, lat, lon){
+    const historyCard = $('<div>');
+    historyCard.attr('class', 'history');
+    historyCard.attr('lat', lat);
+    historyCard.attr('lon', lon);
+    historyCard.text(data);
+    $('#past-search').append(historyCard);
+    console.log('card added');
+}
 function createTodayCard(data){
     const todayCard = $('<div>');
     todayCard.attr('id', 'today-weather-card');

@@ -30,6 +30,11 @@ header > h1{
     height: 90vh;
 }
 
+
+.history{
+    background-color: pink;
+}
+
 #future-weather > div{
     background-color: aquamarine;
 }
