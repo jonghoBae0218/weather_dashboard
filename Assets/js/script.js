@@ -27,6 +27,7 @@ function doFetch(api){
             fetch(weathAPI).then(function(response){
                 if(response.ok){
                     response.json().then(function(data){
+                        createTodayCard(data);
                         console.log(data.list[0]);
                         console.log('city name');
                         console.log(data.city.name);
@@ -53,12 +54,28 @@ function doFetch(api){
         }
     });
 }
-// $(document).ready(function() {
-//     $('#search-button').on('click', function() {
-//         var searchTerm = $('#search-input').val();
-//         console.log('Search term:', searchTerm);
 
-//         // Further processing based on the search term
-//         // For example, you can initiate an AJAX request, filter data, or update the UI.
-//     });
-// });
+function createTodayCard(data){
+    const todayCard = $('<div>');
+    todayCard.attr('id', 'today-weather-card');
+
+        // Create and append h2 element
+    const city = $('<h2>').text(data.city.name + `(${data.list[0].dt_txt})`);
+
+    todayCard.append(city);
+
+        // Create and append four p tags
+   
+    const cloudIcon = $('<p>').text(data.list[0].weather[0].icon);
+    todayCard.append(cloudIcon);
+    const temp = $('<p>').text('Temp: ' + data.list[0].main.temp + "F");
+    todayCard.append(temp);
+    const wind  = $('<p>').text('Wind: ' + data.list[0].wind.speed + "mps");
+    todayCard.append(wind);
+    const hum = $('<p>').text('Humidity: ' + data.list[0].main.humidity + "%");
+    todayCard.append(hum);
+        
+
+        // Append the new div to the div with id "today-weather"
+    $('#today-weather').append(todayCard);
+}

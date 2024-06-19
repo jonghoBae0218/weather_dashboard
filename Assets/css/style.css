@@ -29,3 +29,11 @@ header > h1{
     width: 70vh;
     height: 90vh;
 }
+
+/* #today-weather > div{
+    color: blue;
+} */
+
+#today-weather-card{
+    color: blue;
+}
