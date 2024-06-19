@@ -22,12 +22,28 @@ function doFetch(api){
           response.json().then(function (data) {
             lat = data[0].lat;
             lon = data[0].lon;
-            const weathAPI = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=54ce6fe12fbefa3507abb38187d01121`
+            const weathAPI = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=54ce6fe12fbefa3507abb38187d01121&units=imperial`
     
             fetch(weathAPI).then(function(response){
                 if(response.ok){
                     response.json().then(function(data){
-                        console.log(data);
+                        console.log(data.list[0]);
+                        console.log('city name');
+                        console.log(data.city.name);
+                        console.log('date');
+                        console.log(data.list[0].dt_txt);
+                        console.log('cloudiness');
+                        console.log(data.list[0].weather[0].icon);
+                        console.log('temp');
+                        console.log(data.list[0].main.temp);
+                        console.log('wind');
+                        console.log(data.list[0].wind.speed);
+                        console.log('hum');
+                        console.log(data.list[0].main.humidity);
+                        
+                        // console.log(data.list[0].weather);
+                        // console.log(data.list[8]);
+
                     })
                 }else{
                     console.log('bad');
