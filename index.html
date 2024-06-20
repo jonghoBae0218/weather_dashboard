@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Parsing JSON</title>
+    <title>Weather Forcast</title>
     <link rel="resetsheet" type="text/css" href="./Assets/css/reset.css" />
 
     <link rel="stylesheet" type="text/css" href="./Assets/css/style.css" />
@@ -11,7 +11,7 @@
       src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   </head>
 
-
+<!-- Heade section -->
   <header>
     <h1>
       Weather Dashboard
@@ -19,7 +19,7 @@
   </header>
 
   <body id="contents">
-    
+    <!-- Search section -->
     <div>
       <div id="search-bar">
         <h2>Search for a City:</h2>
@@ -28,15 +28,19 @@
           <button id="search-button">Search</button>
         </div>
 
+        <!-- Location to add search history -->
         <div id="past-search">
         </div>
       </div>
 
+      <!-- Display section -->
       <div id = "display">
-        
+        <!-- Location to add today's weather -->
         <div id="today-weather">
         </div>
+        <!-- Location to set text after search button is clicked -->
         <h2 id="future-header"></h2>
+        <!-- Location to add future weather -->
         <div id="future-weather">
         </div>
       </div>
