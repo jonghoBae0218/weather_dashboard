@@ -117,12 +117,15 @@ header > h1{
     margin: 2%;
     display: flex;
     justify-content:space-evenly;
+    flex-wrap: wrap;
 }
 
 #future-weather > div{
     color: white;
     background-color: #4b8ea2;
     padding: 2px;
+    width: 200px;
+    margin: 5px;
 }
 
 #future-weather > div > p{
