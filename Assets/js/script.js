@@ -15,64 +15,58 @@ searchEl.on('click', function(){
     doFetch(lonAPI);
     
 });
-$(document).ready(function(){
-    // const pastEl = $(".history");
 
 
-    // pastEl.on('click', function(){
-    //     console.log("Hi");
-    //     // console.log(pastEl.attr(lat));
-    // })
-    $(document).on('click', '.history', function() {
-        console.log("Hi");
-        console.log($(this).attr('lat'));
-    });
-})
+$(document).on('click', '.history', function() {
+    console.log($(this).attr('lat'));
+
+});
 
 
 function doFetch(api){
+    removeCurrentInfo();
     fetch(api).then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
             lat = data[0].lat;
             lon = data[0].lon;
             const weathAPI = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=54ce6fe12fbefa3507abb38187d01121&units=imperial`
-    
-            fetch(weathAPI).then(function(response){
-                if(response.ok){
-                    response.json().then(function(data){
-                        createHistory(data.city.name, lat, lon);
-                        createTodayCard(data);
-                        console.log(data.list[0]);
-                        console.log('city name');
-                        console.log(data.city.name);
-                        console.log('date');
-                        console.log(data.list[0].dt_txt);
-                        console.log('cloudiness');
-                        console.log(data.list[0].weather[0].icon);
-                        console.log('temp');
-                        console.log(data.list[0].main.temp);
-                        console.log('wind');
-                        console.log(data.list[0].wind.speed);
-                        console.log('hum');
-                        console.log(data.list[0].main.humidity);
-                        
-                        for(let i=0; i<4 ; i++){
-                            let listIndex = 8*(i +1);
-                            createFutureCard(data, listIndex);
-                        }
-                        // console.log(data.list[0].weather);
-                        // console.log(data.list[8]);
-
-                    })
-                }else{
-                    console.log('bad');
-                }
-            })
+            fetchWithWAPI(weathAPI);
+            
           });
         }
     });
 }
+
+function removeCurrentInfo(){
+    // console.log('Hi');
+    $('#today-weather').children().first().remove();
+            
+    $("#future-weather").find('.future-weather-card').remove();
+
+}
+
+function fetchWithWAPI(weathAPI){
+    fetch(weathAPI).then(function(response){
+        if(response.ok){
+            response.json().then(function(data){
+                createHistory(data.city.name, lat, lon);
+                createTodayCard(data);
+                
+                for(let i=0; i<4 ; i++){
+                    let listIndex = 8*(i +1);
+                    createFutureCard(data, listIndex);
+                }
+                // console.log(data.list[0].weather);
+                // console.log(data.list[8]);
+
+            })
+        }else{
+            console.log('bad');
+        }
+    })
+}
+
 function createHistory(data, lat, lon){
     const historyCard = $('<div>');
     historyCard.attr('class', 'history');
@@ -80,7 +74,6 @@ function createHistory(data, lat, lon){
     historyCard.attr('lon', lon);
     historyCard.text(data);
     $('#past-search').append(historyCard);
-    console.log('card added');
 }
 function createTodayCard(data){
     const todayCard = $('<div>');
