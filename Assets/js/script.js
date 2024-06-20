@@ -1,12 +1,6 @@
-console.log("JS init");
 
 const searchEl = $("#search-button");
 
-
-let lat=0;
-let lon=0;
-
-console.log(lat + ", "  + lon );
 
 
 searchEl.on('click', function(){
@@ -62,8 +56,6 @@ function fetchWithWAPI(weathAPI, newSearch){
                     let listIndex = 8*(i +1);
                     createFutureCard(data, listIndex);
                 }
-                // console.log(data.list[0].weather);
-                // console.log(data.list[8]);
 
             })
         }else{
@@ -90,9 +82,9 @@ function createTodayCard(data){
     todayCard.append(city);
 
         // Create and append four p tags
-   
-    const cloudIcon = $('<p>').text(data.list[0].weather[0].icon);
-    todayCard.append(cloudIcon);
+    const code = data.list[0].weather[0].icon;
+    const cloudIcon = $('<img>').attr('src', `https://openweathermap.org/img/wn/${code}@2x.png`);
+    city.append(cloudIcon);
     const temp = $('<p>').text('Temp: ' + data.list[0].main.temp + "F");
     todayCard.append(temp);
     const wind  = $('<p>').text('Wind: ' + data.list[0].wind.speed + "mps");
@@ -115,8 +107,8 @@ function createFutureCard(data, i){
     futureCard.append(date);
 
         // Create and append four p tags
-   
-    const cloudIcon = $('<p>').text(data.list[i].weather[0].icon);
+    const code = data.list[i].weather[0].icon;
+    const cloudIcon = $('<img>').attr('src', `https://openweathermap.org/img/wn/${code}@2x.png`);
     futureCard.append(cloudIcon);
     const temp = $('<p>').text('Temp: ' + data.list[i].main.temp + "F");
     futureCard.append(temp);
@@ -128,3 +120,13 @@ function createFutureCard(data, i){
 
     $('#future-weather').append(futureCard);
 }
+
+function getWeathIcon(code){
+    const API = `https://openweathermap.org/img/wn/${code}@2x.png`;
+    fetch(API).then(function(response){
+        console.log(response);
+    });
+
+}
+
+// getWeathIcon('10d');
