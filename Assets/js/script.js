@@ -3,7 +3,7 @@ const searchEl = $("#search-button");
 
 
 
-searchEl.on('click', function(){
+searchEl.on('click', function(event){
     var country = $('#search-input').val();
     let lonAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${country}&limit=5&appid=54ce6fe12fbefa3507abb38187d01121`
     doFetch(lonAPI);
@@ -29,6 +29,7 @@ function doFetch(api){
             const weathAPI = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=54ce6fe12fbefa3507abb38187d01121&units=imperial`
             fetchWithWAPI(weathAPI, true);
             
+            
           });
         }
     });
@@ -51,9 +52,10 @@ function fetchWithWAPI(weathAPI, newSearch){
                     createHistory(data.city.name, lat, lon);
                 }
                 createTodayCard(data);
+                $('#future-header').text('Five Day Forecast:');
                 
-                for(let i=0; i<4 ; i++){
-                    let listIndex = 8*(i +1);
+                for(let i=0; i<5 ; i++){
+                    let listIndex = 8*(i +1)-1;
                     createFutureCard(data, listIndex);
                 }
 
@@ -70,14 +72,14 @@ function createHistory(data, lat, lon){
     historyCard.attr('lat', lat);
     historyCard.attr('lon', lon);
     historyCard.text(data);
-    $('#past-search').append(historyCard);
+    $('#past-search').prepend(historyCard);
 }
 function createTodayCard(data){
     const todayCard = $('<div>');
     todayCard.attr('id', 'today-weather-card');
 
         // Create and append h2 element
-    const city = $('<h2>').text(data.city.name + `(${data.list[0].dt_txt})`);
+    const city = $('<h2>').text(data.city.name +'('+ substringDate(`(${data.list[0].dt_txt})`) +')');
 
     todayCard.append(city);
 
@@ -102,7 +104,7 @@ function createFutureCard(data, i){
     futureCard.attr('class', 'future-weather-card');
 
         // Create and append h2 element
-    const date = $('<h2>').text(`(${data.list[i].dt_txt})`);
+    const date = $('<h2>').text(substringDate(`(${data.list[i].dt_txt})`));
 
     futureCard.append(date);
 
@@ -129,4 +131,6 @@ function getWeathIcon(code){
 
 }
 
-// getWeathIcon('10d');
+function substringDate(date){
+    return date.substring(1,11);
+}

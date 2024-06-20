@@ -1,44 +1,115 @@
 *{
-    border: 2px;
+    /* border: 2px;
     border-style: dashed;
-    border-color: red;
+    border-color: red; */
+    padding: 0;
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+    
 }
 header{
     background: linear-gradient(0.25turn, #3f87a6, navy);
+    margin: 1vh;
 
 }
 header > h1{
-    height: 5vh;
+    height: 8vh;
     color: white;
     text-align: end;
     margin-right: 10vh;
+    margin-top: 4vh;
 }
 
 #contents > div {
     display: flex;
+    width: 100%;
 
 }
 
 
 #search-bar{
-    width: 25vh;
+    width: 25%;
     height: 90vh;
+    margin: 2%;
+}
+
+#search-bar > h2{
+    margin: 2%;
 }
 
 #display{
-    width: 70vh;
+    width: 75%;
     height: 90vh;
 }
 
+#search-input{
+    width: 96%;
+    margin: 2%;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 5px;
 
-.history{
-    background-color: pink;
 }
 
-#future-weather > div{
-    background-color: aquamarine;
+#search-button{
+    width: 96%;
+    margin: 2%;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 5px;
+
+    color:white;
+    background-color:#3f87a6;
+}
+
+
+#past-search{
+    border-top: solid gray 2px;
+}
+
+.history{
+    background-color: gray;
+    text-align: center;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 10px;
+    
+}
+
+#today-weather{
+    width: 96%;
+    margin: 2%
 }
 
 #today-weather-card{
-    color: blue;
+    border: solid;
+    border-radius: 5px;
+    width: 100%;
+}
+
+#today-weather-card > h2 > img{
+    height: 25px;
+}
+
+#today-weather-card > p{
+    margin: 2%;
+    height: 25px;
+}
+
+#future-weather{
+    width: 96%;
+    margin: 2%;
+    display: flex;
+    justify-content:space-evenly;
+}
+
+#future-weather > div{
+    color: white;
+    background-color: #4b8ea2;
+    padding: 2px;
+}
+
+#future-weather > div > p{
+    font-size: 20px;
+    margin:10px
 }

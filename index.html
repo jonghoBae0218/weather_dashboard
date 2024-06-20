@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Parsing JSON</title>
+    <link rel="resetsheet" type="text/css" href="./Assets/css/reset.css" />
+
     <link rel="stylesheet" type="text/css" href="./Assets/css/style.css" />
     <script
       src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -22,18 +24,19 @@
       <div id="search-bar">
         <h2>Search for a City:</h2>
         <input type = "text" id="search-input">
-        <button id="search-button">Search</button>
+        <div>
+          <button id="search-button">Search</button>
+        </div>
 
         <div id="past-search">
-          Place to add past data
         </div>
       </div>
 
       <div id = "display">
         
         <div id="today-weather">
-        
         </div>
+        <h2 id="future-header"></h2>
         <div id="future-weather">
         </div>
       </div>
