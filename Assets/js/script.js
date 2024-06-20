@@ -18,20 +18,22 @@ searchEl.on('click', function(){
 
 
 $(document).on('click', '.history', function() {
-    console.log($(this).attr('lat'));
+    const lon = $(this).attr('lon');
+    const lat = $(this).attr('lat');
+    const callBackAPI = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=54ce6fe12fbefa3507abb38187d01121&units=imperial`
+    fetchWithWAPI(callBackAPI, false);    
 
 });
 
 
 function doFetch(api){
-    removeCurrentInfo();
     fetch(api).then(function (response) {
         if (response.ok) {
           response.json().then(function (data) {
             lat = data[0].lat;
             lon = data[0].lon;
             const weathAPI = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=54ce6fe12fbefa3507abb38187d01121&units=imperial`
-            fetchWithWAPI(weathAPI);
+            fetchWithWAPI(weathAPI, true);
             
           });
         }
@@ -46,11 +48,14 @@ function removeCurrentInfo(){
 
 }
 
-function fetchWithWAPI(weathAPI){
+function fetchWithWAPI(weathAPI, newSearch){
     fetch(weathAPI).then(function(response){
+    removeCurrentInfo();
         if(response.ok){
             response.json().then(function(data){
-                createHistory(data.city.name, lat, lon);
+                if(newSearch){
+                    createHistory(data.city.name, lat, lon);
+                }
                 createTodayCard(data);
                 
                 for(let i=0; i<4 ; i++){
