@@ -11,7 +11,7 @@ const searchEl = $("#search-button");
 searchEl.on('click', function(event){
     var country = $('#search-input').val();
     // API that uses city name to get location data
-    let lonAPI = `http://api.openweathermap.org/geo/1.0/direct?q=${country}&limit=5&appid=54ce6fe12fbefa3507abb38187d01121`
+    let lonAPI = `https://api.openweathermap.org/geo/1.0/direct?q=${country}&limit=5&appid=54ce6fe12fbefa3507abb38187d01121`
     doFetch(lonAPI);
     
 });
